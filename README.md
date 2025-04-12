@@ -4,15 +4,15 @@
 
 # Для запуска:
 1. Клонируйте репозиторий себе:
-```bush
+```
 git clone https://github.com/StepanLem/Test-Assignment-66bit-DevOps.git
 ```
 2. Перейдите в директорию проекта и запустите его:
-```bush
+```
 docker compose up
 ```
 3. Проверьте работу, перейдя в браузере по адресу
-```bush
+```
 http://localhost/
 ```
 
