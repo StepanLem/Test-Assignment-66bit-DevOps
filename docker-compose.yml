@@ -1,0 +1,48 @@
+x-spaceport: &spaceport_defaults
+  image: hub.66bit.ru/shared/images/devops-practice:latest
+  networks:
+    - app-network
+
+services:
+  spaceport1:
+    <<: *spaceport_defaults
+    container_name: spaceport1
+    environment:
+      ASP_INSTANCE_NAME: "Spaceport 1"
+
+  spaceport2:
+    <<: *spaceport_defaults
+    container_name: spaceport2
+    environment:
+      ASP_INSTANCE_NAME: "Spaceport 2"
+
+  spaceport3:
+    <<: *spaceport_defaults
+    container_name: spaceport3
+    environment:
+      ASP_INSTANCE_NAME: "Spaceport 3"
+
+  spaceport4:
+    <<: *spaceport_defaults
+    container_name: spaceport4
+    environment:
+      ASP_INSTANCE_NAME: "Spaceport 4"
+
+  loadbalancer:
+    image: nginx:1.27.4-alpine
+    container_name: loadbalancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - spaceport1
+      - spaceport2
+      - spaceport3
+      - spaceport4
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
